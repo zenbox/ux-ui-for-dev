@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Ionic Farben und Typografie</title>
+
+        <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+        <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+        <link rel="stylesheet" href="typography.css" />
+        <link rel="stylesheet" href="color.css" />
+
+        <style>
+            /*
+                Ionic Color API:
+                1) Definiere Farben in :root mit dem Muster --ion-color-<name> plus contrast/shade/tint.
+                2) Verwende sie in Komponenten ueber das Attribut color="<name>".
+
+                Ionic Type API:
+                1) Globale Basis ueber --ion-font-family (und optional weitere globale Text-Variablen).
+                2) Projektspezifische Skalierung ueber eigene Klassen oder Utility-Tokens.
+            */
+            :root {
+                --ion-font-family: var(--font-family);
+
+                --ion-color-primary: var(--corporate-primary-500);
+                --ion-color-primary-contrast: var(--white);
+                --ion-color-primary-shade: var(--corporate-primary-700);
+                --ion-color-primary-tint: var(--corporate-primary-300);
+
+                --ion-color-secondary: var(--corporate-secondary-500);
+                --ion-color-secondary-contrast: var(--white);
+                --ion-color-secondary-shade: var(--corporate-secondary-700);
+                --ion-color-secondary-tint: var(--corporate-secondary-300);
+
+                --ion-color-tertiary: var(--corporate-tertiary-500);
+                --ion-color-tertiary-contrast: var(--white);
+                --ion-color-tertiary-shade: var(--corporate-tertiary-700);
+                --ion-color-tertiary-tint: var(--corporate-tertiary-300);
+
+                --ion-color-success: var(--semantic-success-500);
+                --ion-color-success-contrast: var(--white);
+                --ion-color-success-shade: var(--semantic-success-700);
+                --ion-color-success-tint: color-mix(in srgb, var(--semantic-success-500) 75%, var(--white));
+
+                --ion-color-warning: var(--semantic-warning-500);
+                --ion-color-warning-contrast: var(--gray-900);
+                --ion-color-warning-shade: var(--semantic-warning-700);
+                --ion-color-warning-tint: color-mix(in srgb, var(--semantic-warning-500) 75%, var(--white));
+
+                --ion-color-danger: var(--semantic-danger-500);
+                --ion-color-danger-contrast: var(--white);
+                --ion-color-danger-shade: var(--semantic-danger-700);
+                --ion-color-danger-tint: color-mix(in srgb, var(--semantic-danger-500) 75%, var(--white));
+
+                --ion-background-color: var(--surface);
+                --ion-text-color: var(--text);
+            }
+
+            .demo-wrap {
+                max-width: 920px;
+                margin: 0 auto;
+                padding: 1rem 0.75rem 2rem;
+            }
+
+            .headline {
+                margin: 0 0 0.4rem;
+                font-size: clamp(var(--step-2), 3.4vw, var(--step-3));
+                line-height: calc(var(--baseline) * 2);
+                letter-spacing: 0.01em;
+            }
+
+            .lead {
+                margin: 0;
+                color: var(--gray-700);
+                font-size: var(--step-0);
+                line-height: var(--baseline);
+            }
+
+            .token-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 0.75rem;
+                margin-top: 1rem;
+            }
+
+            .token {
+                border-radius: 0.75rem;
+                padding: 0.75rem;
+                font-size: 0.82rem;
+                font-weight: 700;
+                color: #fff;
+                min-height: 72px;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                gap: 0.2rem;
+            }
+
+            .token code {
+                font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+                font-size: 0.72rem;
+                opacity: 0.95;
+            }
+
+            .token.primary {
+                background: var(--ion-color-primary);
+            }
+            .token.secondary {
+                background: var(--ion-color-secondary);
+            }
+            .token.tertiary {
+                background: var(--ion-color-tertiary);
+                color: #111;
+            }
+            .token.success {
+                background: var(--ion-color-success);
+            }
+            .token.warning {
+                background: var(--ion-color-warning);
+                color: #111;
+            }
+            .token.danger {
+                background: var(--ion-color-danger);
+            }
+
+            .text-scale {
+                display: grid;
+                gap: 0.35rem;
+                margin-top: 0.75rem;
+            }
+
+            .t-xs {
+                font-size: 0.75rem;
+                line-height: 1.45;
+            }
+            .t-sm {
+                font-size: 0.875rem;
+                line-height: 1.45;
+            }
+            .t-md {
+                font-size: 1rem;
+                line-height: 1.5;
+            }
+            .t-lg {
+                font-size: 1.125rem;
+                line-height: 1.45;
+            }
+            .t-xl {
+                font-size: 1.375rem;
+                line-height: 1.3;
+                font-weight: 700;
+            }
+
+            .note {
+                margin-top: 0.8rem;
+                color: var(--gray-700);
+                font-size: 0.9rem;
+                line-height: 1.45;
+            }
+
+            .api-list {
+                margin: 0;
+                padding-left: 1.1rem;
+                color: var(--gray-700);
+                display: grid;
+                gap: 0.45rem;
+                line-height: 1.45;
+            }
+
+            .code-block {
+                margin-top: 0.9rem;
+                padding: 0.7rem 0.8rem;
+                border: 1px solid var(--gray-200);
+                border-radius: 0.6rem;
+                background: var(--gray-50);
+                font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+                font-size: 0.8rem;
+                line-height: 1.45;
+                white-space: pre-wrap;
+            }
+        </style>
+    </head>
+
+    <body>
+        <ion-app>
+            <ion-header translucent="true">
+                <ion-toolbar color="primary">
+                    <ion-title>Ionic Design Tokens Demo</ion-title>
+                </ion-toolbar>
+            </ion-header>
+
+            <ion-content fullscreen="true">
+                <div class="demo-wrap ion-padding">
+                    <h1 class="headline">Farben und Typografie in Ionic</h1>
+                    <p class="lead">Diese Seite zeigt, wie Ionic Farben ueber CSS-Variablen und Typografie ueber globale und lokale Text-Tokens steuert.</p>
+
+                    <ion-card>
+                        <ion-card-header>
+                            <ion-card-title>1) Farb-Tokens in :root</ion-card-title>
+                            <ion-card-subtitle>Corporate + Semantisch</ion-card-subtitle>
+                        </ion-card-header>
+                        <ion-card-content>
+                            <div class="token-grid">
+                                <div class="token primary">Primary <code>--ion-color-primary</code></div>
+                                <div class="token secondary">Secondary <code>--ion-color-secondary</code></div>
+                                <div class="token tertiary">Tertiary <code>--ion-color-tertiary</code></div>
+                                <div class="token success">Success <code>--ion-color-success</code></div>
+                                <div class="token warning">Warning <code>--ion-color-warning</code></div>
+                                <div class="token danger">Danger <code>--ion-color-danger</code></div>
+                            </div>
+                            <p class="note">Komponenten verwenden diese Variablen automatisch, sobald du z. B. <code>color="primary"</code> oder <code>color="danger"</code> setzt.</p>
+                        </ion-card-content>
+                    </ion-card>
+
+                    <ion-card>
+                        <ion-card-header>
+                            <ion-card-title>2) Typografie</ion-card-title>
+                            <ion-card-subtitle>Globale Schriftfamilie + lokale Skala</ion-card-subtitle>
+                        </ion-card-header>
+                        <ion-card-content>
+                            <div class="text-scale">
+                                <div class="t-xs">Text XS: Hilfstext, Metadaten</div>
+                                <div class="t-sm">Text SM: Labels und Nebeninfos</div>
+                                <div class="t-md">Text MD: Standard-Fliesstext in Inhalten</div>
+                                <div class="t-lg">Text LG: Intro-Text und hervorgehobene Inhalte</div>
+                                <div class="t-xl">Text XL: Abschnittsueberschrift</div>
+                            </div>
+                            <p class="note">Die Basis kommt von <code>--ion-font-family</code>. Die eigentliche Skala steuerst du in deinen Klassen, Utility-Tokens oder Component-Styles.</p>
+                        </ion-card-content>
+                    </ion-card>
+
+                    <ion-card>
+                        <ion-card-header>
+                            <ion-card-title>3) Komponenten mit Farb-API</ion-card-title>
+                            <ion-card-subtitle>Ionic nutzt die Tokens direkt</ion-card-subtitle>
+                        </ion-card-header>
+                        <ion-card-content>
+                            <ion-item lines="none">
+                                <ion-label>Serverstatus</ion-label>
+                                <ion-badge color="success">Online</ion-badge>
+                            </ion-item>
+                            <ion-item lines="none">
+                                <ion-label>Import-Job</ion-label>
+                                <ion-badge color="warning">Wartend</ion-badge>
+                            </ion-item>
+                            <ion-item lines="none">
+                                <ion-label>Sicherheitspruefung</ion-label>
+                                <ion-badge color="danger">Fehler</ion-badge>
+                            </ion-item>
+
+                            <ion-grid>
+                                <ion-row>
+                                    <ion-col size="12" size-md="4"><ion-button expand="block" color="primary">Speichern</ion-button></ion-col>
+                                    <ion-col size="12" size-md="4"><ion-button expand="block" color="secondary">Teilen</ion-button></ion-col>
+                                    <ion-col size="12" size-md="4"><ion-button expand="block" color="tertiary">Vorschau</ion-button></ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-card-content>
+                    </ion-card>
+
+                    <ion-card>
+                        <ion-card-header>
+                            <ion-card-title>4) API erklaert (direkt in der Datei)</ion-card-title>
+                            <ion-card-subtitle>So werden Farben und Typografie in Ionic aufgebaut</ion-card-subtitle>
+                        </ion-card-header>
+                        <ion-card-content>
+                            <h3 style="margin: 0 0 0.45rem; font-size: 1rem">Color API</h3>
+                            <ol class="api-list">
+                                <li>Design-Token in :root definieren: <code>--ion-color-primary</code> usw.</li>
+                                <li>Fuer jede Farbe auch <code>-contrast</code>, <code>-shade</code> und <code>-tint</code> pflegen.</li>
+                                <li>In Ionic-Komponenten nur noch <code>color="..."</code> verwenden.</li>
+                            </ol>
+
+                            <div class="code-block">
+                                :root { --ion-color-primary: #1565c0; --ion-color-primary-contrast: #ffffff; --ion-color-primary-shade: #1259a9; --ion-color-primary-tint: #2d74c6; }
+
+                                <ion-button color="primary">Speichern</ion-button>
+                            </div>
+
+                            <h3 style="margin: 1rem 0 0.45rem; font-size: 1rem">Type API</h3>
+                            <ol class="api-list">
+                                <li>Globale Schriftfamilie ueber <code>--ion-font-family</code> setzen.</li>
+                                <li>Eine projektweite Textskala als Klassen/Tokens definieren (z. B. <code>.t-sm</code>, <code>.t-md</code>, <code>.t-xl</code>).</li>
+                                <li>Komponenten-Inhalt konsequent mit dieser Skala stylen, damit die Typografie konsistent bleibt.</li>
+                            </ol>
+
+                            <div class="code-block">
+                                :root { --ion-font-family: "Barlow", "Avenir Next", "Segoe UI", sans-serif; } .t-md { font-size: 1rem; line-height: 1.5; } .t-xl { font-size: 1.375rem; line-height:
+                                1.3; font-weight: 700; }
+                            </div>
+                        </ion-card-content>
+                    </ion-card>
+                </div>
+            </ion-content>
+        </ion-app>
+    </body>
+</html>

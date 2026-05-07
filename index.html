@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="typography.css" />
+        <title>Grundlinienraster Demo</title>
+    </head>
+    <body class="show-baseline-grid">
+        <div class="grid-controls" aria-label="Rastersteuerung">
+            <button type="button" id="grid-minus" aria-label="Rasterabstand verkleinern">-</button>
+            <button type="button" id="grid-plus" aria-label="Rasterabstand vergroessern">+</button>
+            <span id="grid-status">step: <code>36px</code> | offset: <code>0px</code></span>
+        </div>
+
+        <header>
+            <h1>Typografisches Grundlinienraster</h1>
+            <p>Dieses Beispiel zeigt, wie semantische Elemente mit einheitlichen Zeilenhoehen und Abstaenden auf derselben Grundlinie liegen.</p>
+            <nav aria-label="Hauptnavigation">
+                <ul>
+                    <li>Start</li>
+                    <li>Raster</li>
+                    <li>Beispiele</li>
+                    <li>Kontakt</li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <article>
+                <section>
+                    <h2>Abschnitt mit Fliesstext</h2>
+                    <p>Alle Absaetze und Ueberschriften orientieren sich am selben vertikalen Rhythmus. Dadurch entsteht ein ruhiges und klar lesbares Schriftbild.</p>
+                    <h3>Untertitel im Raster</h3>
+                    <p>Auch bei unterschiedlichen Schriftgroessen bleiben die Grundlinien deckungsgleich, weil Line-Height und vertikale Abstaende als Vielfache definiert sind.</p>
+                    <h4>Kleiner Zwischentitel</h4>
+                    <p>Kurzer Absatz unter einer H4-Ueberschrift fuer den Vergleich der Hierarchie.</p>
+                </section>
+
+                <section>
+                    <h2>Listen und Zitate</h2>
+                    <p>Ungeordnete und geordnete Listen folgen denselben vertikalen Abstaenden wie normaler Fliesstext.</p>
+                    <ul>
+                        <li>Erster Listenpunkt mit etwas mehr Text fuer den Zeilenumbruch im Raster.</li>
+                        <li>Zweiter Listenpunkt zur Sichtpruefung der Abstaende.</li>
+                        <li>Dritter Listenpunkt zur Vollstaendigkeit.</li>
+                    </ul>
+                    <ol>
+                        <li>Erster nummerierter Punkt.</li>
+                        <li>Zweiter nummerierter Punkt.</li>
+                        <li>Dritter nummerierter Punkt.</li>
+                    </ol>
+                    <blockquote>Typografie wirkt dann besonders hochwertig, wenn der vertikale Rhythmus konsistent bleibt.</blockquote>
+                </section>
+
+                <figure>
+                    <h2>Figure und Figcaption</h2>
+                    <p>Stellvertretender Inhalt fuer eine Grafik oder ein Bild.</p>
+                    <figcaption>Abb. 1: Figcaption als semantisches Textelement im selben Raster.</figcaption>
+                </figure>
+            </article>
+
+            <aside>
+                <h3>Seitennotiz</h3>
+                <p>Das Aside-Element zeigt, dass auch Nebeninhalte den gleichen typografischen Takt einhalten.</p>
+            </aside>
+        </main>
+
+        <footer>
+            <p>Footer-Text fuer die abschliessende Rasterkontrolle.</p>
+        </footer>
+
+        <script>
+            (function () {
+                const root = document.documentElement;
+                const minusBtn = document.getElementById("grid-minus");
+                const plusBtn = document.getElementById("grid-plus");
+                const status = document.getElementById("grid-status");
+
+                const computed = getComputedStyle(root);
+                const rootFontSize = Number.parseFloat(computed.fontSize);
+                const rootLineHeightFactor = Number.parseFloat(computed.getPropertyValue("--line-height"));
+                const baselineFromCss = Number.parseFloat(computed.getPropertyValue("--baseline"));
+                const baseBaseline = Number.isFinite(rootFontSize) && Number.isFinite(rootLineHeightFactor) ? rootFontSize * rootLineHeightFactor : 24;
+
+                let baselinePx = Number.isFinite(baselineFromCss) ? Math.round(baselineFromCss) : Math.round(baseBaseline);
+                let gridOffset = 0;
+
+                function render() {
+                    const adjust = baselinePx - baseBaseline;
+                    root.style.setProperty("--baseline-adjust", adjust + "px");
+                    root.style.setProperty("--grid-offset", gridOffset + "px");
+                    status.innerHTML = "baseline: <code>" + baselinePx + "px</code> | offset: <code>" + gridOffset + "px</code>";
+                }
+
+                function changeStep(delta) {
+                    baselinePx = Math.max(8, baselinePx + delta);
+                    render();
+                }
+
+                function changeOffset(delta) {
+                    gridOffset += delta;
+                    render();
+                }
+
+                plusBtn.addEventListener("click", function () {
+                    changeStep(1);
+                });
+
+                minusBtn.addEventListener("click", function () {
+                    changeStep(-1);
+                });
+
+                document.addEventListener("keydown", function (event) {
+                    const tag = (event.target && event.target.tagName) || "";
+                    if (tag === "INPUT" || tag === "TEXTAREA") {
+                        return;
+                    }
+
+                    if (event.key === "+" || event.key === "=") {
+                        event.preventDefault();
+                        changeStep(1);
+                    } else if (event.key === "-") {
+                        event.preventDefault();
+                        changeStep(-1);
+                    } else if (event.key === "ArrowUp") {
+                        event.preventDefault();
+                        changeOffset(-1);
+                    } else if (event.key === "ArrowDown") {
+                        event.preventDefault();
+                        changeOffset(1);
+                    }
+                });
+
+                render();
+            })();
+        </script>
+    </body>
+</html>

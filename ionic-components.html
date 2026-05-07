@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Ionic Komponenten Bibliothek</title>
+
+        <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+        <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+        <link rel="stylesheet" href="typography.css" />
+        <link rel="stylesheet" href="color.css" />
+
+        <style>
+            :root {
+                --ion-font-family: var(--font-family);
+
+                --ion-color-primary: var(--corporate-primary-500);
+                --ion-color-primary-contrast: var(--white);
+                --ion-color-primary-shade: var(--corporate-primary-700);
+                --ion-color-primary-tint: var(--corporate-primary-300);
+
+                --ion-color-secondary: var(--corporate-secondary-500);
+                --ion-color-secondary-contrast: var(--white);
+                --ion-color-secondary-shade: var(--corporate-secondary-700);
+                --ion-color-secondary-tint: var(--corporate-secondary-300);
+
+                --ion-color-tertiary: var(--corporate-tertiary-500);
+                --ion-color-tertiary-contrast: var(--white);
+                --ion-color-tertiary-shade: var(--corporate-tertiary-700);
+                --ion-color-tertiary-tint: var(--corporate-tertiary-300);
+
+                --ion-color-success: var(--semantic-success-500);
+                --ion-color-success-contrast: var(--white);
+                --ion-color-success-shade: var(--semantic-success-700);
+                --ion-color-success-tint: color-mix(in srgb, var(--semantic-success-500) 75%, var(--white));
+
+                --ion-color-warning: var(--semantic-warning-500);
+                --ion-color-warning-contrast: var(--gray-900);
+                --ion-color-warning-shade: var(--semantic-warning-700);
+                --ion-color-warning-tint: color-mix(in srgb, var(--semantic-warning-500) 75%, var(--white));
+
+                --ion-color-danger: var(--semantic-danger-500);
+                --ion-color-danger-contrast: var(--white);
+                --ion-color-danger-shade: var(--semantic-danger-700);
+                --ion-color-danger-tint: color-mix(in srgb, var(--semantic-danger-500) 75%, var(--white));
+
+                --ion-background-color: var(--surface);
+                --ion-text-color: var(--text);
+                --ion-card-background: var(--white);
+            }
+
+            .layout {
+                display: grid;
+                grid-template-columns: 280px 1fr;
+                gap: 1rem;
+            }
+
+            .toc {
+                position: sticky;
+                top: 0.5rem;
+                align-self: start;
+            }
+
+            .toc ion-card-title {
+                font-size: 1rem;
+            }
+
+            .toc a {
+                color: var(--ion-text-color);
+                text-decoration: none;
+            }
+
+            .toc a:hover {
+                color: var(--ion-color-primary);
+            }
+
+            .type-xs {
+                font-size: calc(var(--step-0) * 0.75);
+                line-height: var(--baseline);
+            }
+
+            .type-sm {
+                font-size: calc(var(--step-0) * 0.875);
+                line-height: var(--baseline);
+            }
+
+            .type-md {
+                font-size: var(--step-0);
+                line-height: var(--baseline);
+            }
+
+            .type-lg {
+                font-size: var(--step-1);
+                line-height: var(--baseline);
+            }
+
+            .type-xl {
+                font-size: var(--step-2);
+                line-height: calc(var(--baseline) * 2);
+                font-weight: 700;
+            }
+
+            section {
+                scroll-margin-top: 78px;
+            }
+
+            .section-grid {
+                display: grid;
+                gap: 0.75rem;
+            }
+
+            .chip-row,
+            .button-row,
+            .badge-row {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .example-box {
+                border: 1px solid var(--gray-200);
+                border-radius: 10px;
+                padding: 0.8rem;
+                background: var(--white);
+            }
+
+            .small-note {
+                color: var(--gray-700);
+                margin: 0;
+            }
+
+            @media (max-width: 980px) {
+                .layout {
+                    grid-template-columns: 1fr;
+                }
+
+                .toc {
+                    position: static;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <ion-app>
+            <ion-header>
+                <ion-toolbar color="primary">
+                    <ion-title class="type-lg">Ionic Komponenten Bibliothek</ion-title>
+                    <ion-buttons slot="end">
+                        <ion-button fill="clear" color="light" href="#intro">Start</ion-button>
+                    </ion-buttons>
+                </ion-toolbar>
+            </ion-header>
+
+            <ion-content>
+                <div class="ion-padding layout">
+                    <aside class="toc">
+                        <ion-card>
+                            <ion-card-header>
+                                <ion-card-title>Inhalt (TOC)</ion-card-title>
+                                <ion-card-subtitle class="type-sm">Anker-Navigation</ion-card-subtitle>
+                            </ion-card-header>
+                            <ion-card-content>
+                                <ion-list lines="none">
+                                    <ion-item button href="#intro">Intro</ion-item>
+                                    <ion-item button href="#navigation-layout">Navigation + Layout</ion-item>
+                                    <ion-item button href="#basic-content">Basic Content</ion-item>
+                                    <ion-item button href="#forms">Form Controls</ion-item>
+                                    <ion-item button href="#lists">Lists + Grouping</ion-item>
+                                    <ion-item button href="#feedback">Feedback + Status</ion-item>
+                                    <ion-item button href="#overlays">Overlays</ion-item>
+                                    <ion-item button href="#advanced">Advanced</ion-item>
+                                </ion-list>
+                            </ion-card-content>
+                        </ion-card>
+                    </aside>
+
+                    <main class="section-grid">
+                        <section id="intro">
+                            <ion-card>
+                                <ion-card-header>
+                                    <ion-card-title class="type-xl">Ionic mit lokaler Type- und Color-API</ion-card-title>
+                                    <ion-card-subtitle class="type-sm">Alle Komponentenbeispiele nutzen dieselben lokalen Tokens</ion-card-subtitle>
+                                </ion-card-header>
+                                <ion-card-content>
+                                    <p class="type-md">
+                                        Farben laufen ueber die lokalen Tokens in :root (primary, secondary, tertiary, success, warning, danger). Typografie laeuft ueber --ion-font-family und die
+                                        Utility-Klassen .type-xs bis .type-xl.
+                                    </p>
+                                    <div class="badge-row" style="margin-top: 0.75rem">
+                                        <ion-badge color="primary">Primary</ion-badge>
+                                        <ion-badge color="secondary">Secondary</ion-badge>
+                                        <ion-badge color="tertiary">Tertiary</ion-badge>
+                                        <ion-badge color="success">Success</ion-badge>
+                                        <ion-badge color="warning">Warning</ion-badge>
+                                        <ion-badge color="danger">Danger</ion-badge>
+                                    </div>
+                                </ion-card-content>
+                            </ion-card>
+                        </section>
+
+                        <section id="navigation-layout">
+                            <ion-card>
+                                <ion-card-header>
+                                    <ion-card-title>Navigation + Layout Komponenten</ion-card-title>
+                                </ion-card-header>
+                                <ion-card-content>
+                                    <ion-breadcrumbs>
+                                        <ion-breadcrumb href="#intro">Home</ion-breadcrumb>
+                                        <ion-breadcrumb href="#navigation-layout">Layout</ion-breadcrumb>
+                                    </ion-breadcrumbs>
+
+                                    <ion-toolbar color="light" style="margin-top: 0.6rem">
+                                        <ion-buttons slot="start">
+                                            <ion-back-button default-href="#intro"></ion-back-button>
+                                        </ion-buttons>
+                                        <ion-title class="type-sm">ion-back-button + ion-buttons + ion-title</ion-title>
+                                        <ion-buttons slot="end">
+                                            <ion-button color="primary" href="#intro">TOC Start</ion-button>
+                                        </ion-buttons>
+                                    </ion-toolbar>
+
+                                    <ion-grid>
+                                        <ion-row>
+                                            <ion-col size="12" size-md="4"><div class="example-box">ion-grid / ion-row / ion-col</div></ion-col>
+                                            <ion-col size="12" size-md="4"><div class="example-box">Responsive Spalten</div></ion-col>
+                                            <ion-col size="12" size-md="4"><div class="example-box">Token-Farben global</div></ion-col>
+                                        </ion-row>
+                                    </ion-grid>
+
+                                    <ion-segment value="overview" style="margin-top: 0.8rem">
+                                        <ion-segment-button value="overview">
+                                            <ion-label>Overview</ion-label>
+                                        </ion-segment-button>
+                                        <ion-segment-button value="details">
+                                            <ion-label>Details</ion-label>
+                                        </ion-segment-button>
+                                        <ion-segment-button value="tokens">
+                                            <ion-label>Tokens</ion-label>
+                                        </ion-segment-button>
+                                    </ion-segment>
+
+                                    <div class="example-box" style="margin-top: 0.8rem; padding: 0">
+                                        <ion-tab-bar>
+                                            <ion-tab-button>
+                                                <ion-label>Home</ion-label>
+                                            </ion-tab-button>
+                                            <ion-tab-button>
+                                                <ion-label>Library</ion-label>
+                                            </ion-tab-button>
+                                            <ion-tab-button>
+                                                <ion-label>Settings</ion-label>
+                                            </ion-tab-button>
+                                        </ion-tab-bar>
+                                    </div>
+                                </ion-card-content>
+                            </ion-card>
+                        </section>
+
+                        <section id="basic-content">
+                            <ion-card>
+                                <ion-card-header>
+                                    <ion-card-title>Basic Content Komponenten</ion-card-title>
+                                </ion-card-header>
+                                <ion-card-content>
+                                    <ion-item lines="none">
+                                        <ion-avatar slot="start">
+                                            <img alt="Avatar" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                                        </ion-avatar>
+                                        <ion-label>
+                                            <h2 class="type-lg">ion-avatar + ion-label + ion-note</h2>
+                                            <p class="type-sm">Grundlegende Inhaltsdarstellung in Listen</p>
+                                        </ion-label>
+                                        <ion-note slot="end">v1.0</ion-note>
+                                    </ion-item>
+
+                                    <ion-item lines="none">
+                                        <ion-thumbnail slot="start">
+                                            <img alt="Thumbnail" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+                                        </ion-thumbnail>
+                                        <ion-label class="type-md">ion-thumbnail + ion-img</ion-label>
+                                    </ion-item>
+
+                                    <div class="chip-row" style="margin-top: 0.6rem">
+                                        <ion-chip color="primary"><ion-label>ion-chip</ion-label></ion-chip>
+                                        <ion-chip color="secondary"><ion-label>Meta</ion-label></ion-chip>
+                                        <ion-chip color="tertiary"><ion-label>Tag</ion-label></ion-chip>
+                                    </div>
+
+                                    <div style="margin-top: 0.8rem">
+                                        <ion-text color="primary"><p class="type-md">ion-text mit Tokenfarbe</p></ion-text>
+                                    </div>
+
+                                    <ion-img src="https://ionicframework.com/docs/img/demos/card-media.png" alt="Demo Image" style="border-radius: 10px; margin-top: 0.8rem"></ion-img>
+                                </ion-card-content>
+                            </ion-card>
+                        </section>
+
+                        <section id="forms">
+                            <ion-card>
+                                <ion-card-header>
+                                    <ion-card-title>Form Controls</ion-card-title>
+                                </ion-card-header>
+                                <ion-card-content>
+                                    <ion-list>
+                                        <ion-item>
+                                            <ion-label position="stacked">Text Input</ion-label>
+                                            <ion-input placeholder="Max Mustermann"></ion-input>
+                                        </ion-item>
+                                        <ion-item>
+                                            <ion-label position="stacked">Passwort</ion-label>
+                                            <ion-input type="password" placeholder="Passwort"></ion-input>
+                                            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+                                        </ion-item>
+                                        <ion-item>
+                                            <ion-label position="stacked">Textarea</ion-label>
+                                            <ion-textarea placeholder="Notiz eingeben"></ion-textarea>
+                                        </ion-item>
+                                        <ion-item>
+                                            <ion-label>Toggle</ion-label>
+                                            <ion-toggle checked="true" color="primary"></ion-toggle>
+                                        </ion-item>
+                                        <ion-item>
+                                            <ion-label>Checkbox</ion-label>
+                                            <ion-checkbox slot="end" checked="true"></ion-checkbox>
+                                        </ion-item>
+                                        <ion-item>
+                                            <ion-label>Range</ion-label>
+                                            <ion-range min="0" max="100" value="55"></ion-range>
+                                        </ion-item>
+                                        <ion-item>
+                                            <ion-label>Select</ion-label>
+                                            <ion-select value="design">
+                                                <ion-select-option value="design">Design</ion-select-option>
+                                                <ion-select-option value="dev">Development</ion-select-option>
+                                                <ion-select-option value="qa">QA</ion-select-option>
+                                            </ion-select>
+                                        </ion-item>
+                                        <ion-item>
+                                            <ion-label position="stacked">Searchbar</ion-label>
+                                            <ion-searchbar placeholder="Suche Komponenten"></ion-searchbar>
+                                        </ion-item>
+                                    </ion-list>
+
+                                    <ion-radio-group value="a" style="margin-top: 0.5rem">
+                                        <ion-item>
+                                            <ion-label>Option A</ion-label>
+                                            <ion-radio slot="end" value="a"></ion-radio>
+                                        </ion-item>
+                                        <ion-item>
+                                            <ion-label>Option B</ion-label>
+                                            <ion-radio slot="end" value="b"></ion-radio>
+                                        </ion-item>
+                                    </ion-radio-group>
+
+                                    <div style="margin-top: 0.8rem">
+                                        <ion-datetime-button datetime="demo-datetime"></ion-datetime-button>
+                                        <ion-modal keep-contents-mounted="true">
+                                            <ion-datetime id="demo-datetime" presentation="date-time"></ion-datetime>
+                                        </ion-modal>
+                                    </div>
+                                </ion-card-content>
+                            </ion-card>
+                        </section>
+
+                        <section id="lists">
+                            <ion-card>
+                                <ion-card-header>
+                                    <ion-card-title>Lists + Grouping</ion-card-title>
+                                </ion-card-header>
+                                <ion-card-content>
+                                    <ion-list>
+                                        <ion-list-header>
+                                            <ion-label>ion-list-header</ion-label>
+                                        </ion-list-header>
+                                        <ion-item-group>
+                                            <ion-item-divider color="light">
+                                                <ion-label>Gruppe A</ion-label>
+                                            </ion-item-divider>
+                                            <ion-item>
+                                                <ion-label>Eintrag 1</ion-label>
+                                            </ion-item>
+                                            <ion-item>
+                                                <ion-label>Eintrag 2</ion-label>
+                                            </ion-item>
+                                        </ion-item-group>
+                                    </ion-list>
+
+                                    <ion-list>
+                                        <ion-item-sliding>
+                                            <ion-item>
+                                                <ion-label>ion-item-sliding</ion-label>
+                                            </ion-item>
+                                            <ion-item-options side="end">
+                                                <ion-item-option color="primary">Bearbeiten</ion-item-option>
+                                                <ion-item-option color="danger">Loeschen</ion-item-option>
+                                            </ion-item-options>
+                                        </ion-item-sliding>
+                                    </ion-list>
+
+                                    <ion-reorder-group disabled="false">
+                                        <ion-item>
+                                            <ion-label>Reorder 1</ion-label>
+                                            <ion-reorder slot="end"></ion-reorder>
+                                        </ion-item>
+                                        <ion-item>
+                                            <ion-label>Reorder 2</ion-label>
+                                            <ion-reorder slot="end"></ion-reorder>
+                                        </ion-item>
+                                    </ion-reorder-group>
+
+                                    <ion-accordion-group value="first" style="margin-top: 0.75rem">
+                                        <ion-accordion value="first">
+                                            <ion-item slot="header" color="light">
+                                                <ion-label>Accordion 1</ion-label>
+                                            </ion-item>
+                                            <div slot="content" class="ion-padding">Inhalt fuer ion-accordion.</div>
+                                        </ion-accordion>
+                                        <ion-accordion value="second">
+                                            <ion-item slot="header" color="light">
+                                                <ion-label>Accordion 2</ion-label>
+                                            </ion-item>
+                                            <div slot="content" class="ion-padding">Weiteres Beispiel.</div>
+                                        </ion-accordion>
+                                    </ion-accordion-group>
+                                </ion-card-content>
+                            </ion-card>
+                        </section>
+
+                        <section id="feedback">
+                            <ion-card>
+                                <ion-card-header>
+                                    <ion-card-title>Feedback + Status Komponenten</ion-card-title>
+                                </ion-card-header>
+                                <ion-card-content>
+                                    <div class="button-row">
+                                        <ion-button color="primary">Primary</ion-button>
+                                        <ion-button color="secondary">Secondary</ion-button>
+                                        <ion-button color="tertiary">Tertiary</ion-button>
+                                        <ion-button color="success">Success</ion-button>
+                                        <ion-button color="warning">Warning</ion-button>
+                                        <ion-button color="danger">Danger</ion-button>
+                                    </div>
+
+                                    <div class="badge-row" style="margin-top: 0.8rem">
+                                        <ion-badge color="primary">4</ion-badge>
+                                        <ion-badge color="success">OK</ion-badge>
+                                        <ion-badge color="warning">WIP</ion-badge>
+                                        <ion-badge color="danger">ERR</ion-badge>
+                                    </div>
+
+                                    <div style="margin-top: 1rem">
+                                        <ion-progress-bar value="0.55"></ion-progress-bar>
+                                        <ion-progress-bar type="indeterminate" color="secondary" style="margin-top: 0.35rem"></ion-progress-bar>
+                                    </div>
+
+                                    <div class="button-row" style="margin-top: 0.9rem">
+                                        <ion-spinner name="crescent"></ion-spinner>
+                                        <ion-spinner name="dots" color="primary"></ion-spinner>
+                                        <ion-skeleton-text animated="true" style="width: 120px"></ion-skeleton-text>
+                                    </div>
+
+                                    <p class="small-note type-sm" style="margin-top: 0.8rem">ion-ripple-effect ist in Material Design Buttons sichtbar (Android-Modus).</p>
+
+                                    <div class="example-box ion-activatable" style="margin-top: 0.7rem; position: relative; overflow: hidden">
+                                        Klickflaeche mit ion-ripple-effect
+                                        <ion-ripple-effect></ion-ripple-effect>
+                                    </div>
+
+                                    <div class="example-box type-sm" style="margin-top: 0.7rem">
+                                        ion-backdrop (nur als Hinweis): als Viewport-Overlay nicht inline im normalen Content-Flow verwenden.
+                                    </div>
+                                </ion-card-content>
+                            </ion-card>
+                        </section>
+
+                        <section id="overlays">
+                            <ion-card>
+                                <ion-card-header>
+                                    <ion-card-title>Overlays</ion-card-title>
+                                    <ion-card-subtitle>Alert, Action Sheet, Modal, Popover, Loading, Toast</ion-card-subtitle>
+                                </ion-card-header>
+                                <ion-card-content>
+                                    <div class="button-row">
+                                        <ion-button id="open-alert" color="primary">Alert</ion-button>
+                                        <ion-button id="open-action-sheet" color="secondary">Action Sheet</ion-button>
+                                        <ion-button id="open-modal" color="tertiary">Modal</ion-button>
+                                        <ion-button id="open-popover" color="success">Popover</ion-button>
+                                        <ion-button id="open-loading" color="warning">Loading</ion-button>
+                                        <ion-button id="open-toast" color="danger">Toast</ion-button>
+                                    </div>
+
+                                    <ion-alert trigger="open-alert" header="Alert" sub-header="Ionic Overlay" message="Dies ist ein Alert-Beispiel."></ion-alert>
+
+                                    <ion-action-sheet trigger="open-action-sheet" header="Aktion waehlen"></ion-action-sheet>
+
+                                    <ion-modal trigger="open-modal">
+                                        <ion-header>
+                                            <ion-toolbar color="primary">
+                                                <ion-title>Modal Beispiel</ion-title>
+                                                <ion-buttons slot="end">
+                                                    <ion-button id="close-modal-button">Schliessen</ion-button>
+                                                </ion-buttons>
+                                            </ion-toolbar>
+                                        </ion-header>
+                                        <ion-content class="ion-padding">
+                                            <p class="type-md">Modal Inhalt mit derselben lokalen Typo/Farb-Konfiguration.</p>
+                                        </ion-content>
+                                    </ion-modal>
+
+                                    <ion-popover trigger="open-popover" dismiss-on-select="true">
+                                        <ion-content class="ion-padding">Ein kurzes Popover.</ion-content>
+                                    </ion-popover>
+
+                                    <ion-loading message="Lade Daten..." duration="1600" id="demo-loading"></ion-loading>
+                                    <ion-toast message="Aenderungen gespeichert" duration="1800" position="bottom" id="demo-toast"></ion-toast>
+                                </ion-card-content>
+                            </ion-card>
+                        </section>
+
+                        <section id="advanced">
+                            <ion-card>
+                                <ion-card-header>
+                                    <ion-card-title>Advanced Komponenten</ion-card-title>
+                                </ion-card-header>
+                                <ion-card-content>
+                                    <div class="example-box">
+                                        <p class="type-sm small-note">Diese Komponenten sind app-/viewport-level und werden in dieser Bibliotheksseite absichtlich nicht live gemountet:</p>
+                                        <ul class="type-sm" style="margin: 0.5rem 0 0; padding-left: 1.1rem">
+                                            <li>ion-refresher</li>
+                                            <li>ion-infinite-scroll</li>
+                                            <li>ion-fab</li>
+                                            <li>ion-backdrop</li>
+                                        </ul>
+                                        <p class="type-sm small-note" style="margin-top: 0.6rem">
+                                            Grund: Diese Elemente arbeiten mit fixed/overlay-Logik und koennen in einer Sammeldemo den restlichen Inhalt ueberlagern.
+                                        </p>
+                                    </div>
+
+                                    <p class="type-sm small-note" style="margin-top: 1rem">
+                                        Diese Seite zeigt die wichtigsten Ionic Core Komponenten in einer Bibliotheksstruktur inklusive verlinkter TOC-Navigation.
+                                    </p>
+                                </ion-card-content>
+                            </ion-card>
+                        </section>
+
+                        <section>
+                            <ion-card>
+                                <ion-card-content>
+                                    <p class="type-sm small-note">Ionic Components Library Demo</p>
+                                </ion-card-content>
+                            </ion-card>
+                        </section>
+                    </main>
+                </div>
+            </ion-content>
+        </ion-app>
+
+        <script>
+            const loading = document.getElementById("demo-loading");
+            const toast = document.getElementById("demo-toast");
+
+            document.getElementById("open-loading").addEventListener("click", () => {
+                loading.present();
+            });
+
+            document.getElementById("open-toast").addEventListener("click", () => {
+                toast.present();
+            });
+
+            const actionSheet = document.querySelector("ion-action-sheet");
+            actionSheet.buttons = [{ text: "Speichern", role: "selected" }, { text: "Duplizieren" }, { text: "Abbrechen", role: "cancel" }];
+
+            const alertCmp = document.querySelector("ion-alert");
+            alertCmp.buttons = ["OK"];
+
+            const modalCmp = document.querySelector("ion-modal");
+            document.getElementById("close-modal-button").addEventListener("click", () => {
+                modalCmp.dismiss();
+            });
+        </script>
+    </body>
+</html>

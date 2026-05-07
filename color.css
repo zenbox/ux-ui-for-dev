@@ -1,0 +1,398 @@
+:root {
+    --white: #ffffff;
+    --black: #101214;
+
+    /* Nur diese Basiswerte muessen definiert werden. */
+    --corporate-primary-base: #7a1499;
+    --corporate-secondary-base: #f57c2f;
+    --corporate-tertiary-base: #5a6df0;
+    --corporate-quaternary-base: #d73d8f;
+
+    --semantic-success-base: #1f9d62;
+    --semantic-info-base: #2563eb;
+    --semantic-warning-base: #d59600;
+    --semantic-danger-base: #d93f3b;
+
+    --neutral-base: #1f242d;
+
+    /* Corporate Abstufungen (calculatorisch aus *-base). */
+    --corporate-primary-500: var(--corporate-primary-base);
+    --corporate-primary-300: color-mix(in srgb, var(--corporate-primary-base) 58%, var(--white));
+    --corporate-primary-100: color-mix(in srgb, var(--corporate-primary-base) 20%, var(--white));
+    --corporate-primary-700: color-mix(in srgb, var(--corporate-primary-base) 72%, var(--black));
+
+    --corporate-secondary-500: var(--corporate-secondary-base);
+    --corporate-secondary-300: color-mix(in srgb, var(--corporate-secondary-base) 58%, var(--white));
+    --corporate-secondary-100: color-mix(in srgb, var(--corporate-secondary-base) 20%, var(--white));
+    --corporate-secondary-700: color-mix(in srgb, var(--corporate-secondary-base) 72%, var(--black));
+
+    --corporate-tertiary-500: var(--corporate-tertiary-base);
+    --corporate-tertiary-300: color-mix(in srgb, var(--corporate-tertiary-base) 58%, var(--white));
+    --corporate-tertiary-100: color-mix(in srgb, var(--corporate-tertiary-base) 20%, var(--white));
+    --corporate-tertiary-700: color-mix(in srgb, var(--corporate-tertiary-base) 72%, var(--black));
+
+    --corporate-quaternary-500: var(--corporate-quaternary-base);
+    --corporate-quaternary-300: color-mix(in srgb, var(--corporate-quaternary-base) 58%, var(--white));
+    --corporate-quaternary-100: color-mix(in srgb, var(--corporate-quaternary-base) 20%, var(--white));
+    --corporate-quaternary-700: color-mix(in srgb, var(--corporate-quaternary-base) 72%, var(--black));
+
+    /* Semantische Abstufungen (calculatorisch aus *-base). */
+    --semantic-success-500: var(--semantic-success-base);
+    --semantic-success-100: color-mix(in srgb, var(--semantic-success-base) 20%, var(--white));
+    --semantic-success-700: color-mix(in srgb, var(--semantic-success-base) 72%, var(--black));
+
+    --semantic-info-500: var(--semantic-info-base);
+    --semantic-info-100: color-mix(in srgb, var(--semantic-info-base) 20%, var(--white));
+    --semantic-info-700: color-mix(in srgb, var(--semantic-info-base) 72%, var(--black));
+
+    --semantic-warning-500: var(--semantic-warning-base);
+    --semantic-warning-100: color-mix(in srgb, var(--semantic-warning-base) 20%, var(--white));
+    --semantic-warning-700: color-mix(in srgb, var(--semantic-warning-base) 72%, var(--black));
+
+    --semantic-danger-500: var(--semantic-danger-base);
+    --semantic-danger-100: color-mix(in srgb, var(--semantic-danger-base) 20%, var(--white));
+    --semantic-danger-700: color-mix(in srgb, var(--semantic-danger-base) 72%, var(--black));
+
+    /* Graustufen calculatorisch aus einem Neutral-Basiswert. */
+    --gray-900: var(--neutral-base);
+    --gray-800: color-mix(in srgb, var(--neutral-base) 86%, var(--white));
+    --gray-700: color-mix(in srgb, var(--neutral-base) 72%, var(--white));
+    --gray-600: color-mix(in srgb, var(--neutral-base) 58%, var(--white));
+    --gray-500: color-mix(in srgb, var(--neutral-base) 45%, var(--white));
+    --gray-400: color-mix(in srgb, var(--neutral-base) 34%, var(--white));
+    --gray-300: color-mix(in srgb, var(--neutral-base) 24%, var(--white));
+    --gray-200: color-mix(in srgb, var(--neutral-base) 16%, var(--white));
+    --gray-100: color-mix(in srgb, var(--neutral-base) 10%, var(--white));
+    --gray-50: color-mix(in srgb, var(--neutral-base) 5%, var(--white));
+
+    --surface: color-mix(in srgb, var(--neutral-base) 6%, var(--white));
+    --text: var(--gray-900);
+    --radius: 12px;
+    --ui-space-1: 0.5rem;
+    --ui-space-2: 0.75rem;
+    --ui-space-3: 1rem;
+    --ui-space-4: 1.5rem;
+    --ui-space-5: 2rem;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: var(--ui-space-5);
+    font-family: var(--font-family, "Barlow", "Avenir Next", "Segoe UI", sans-serif);
+    font-size: var(--step-0, 1rem);
+    line-height: var(--baseline, 1.5);
+    color: var(--text);
+    background: radial-gradient(circle at 10% 10%, #ffffff 0%, rgba(255, 255, 255, 0) 55%), linear-gradient(180deg, #f7fbfd 0%, #edf2f6 100%);
+}
+
+h1,
+h2,
+h3,
+p {
+    margin: 0;
+}
+
+.page {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    gap: var(--ui-space-5);
+}
+
+.section {
+    background: rgba(255, 255, 255, 0.84);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    padding: var(--ui-space-4);
+    backdrop-filter: blur(3px);
+}
+
+.section > h2 {
+    margin-bottom: var(--ui-space-2);
+    font-size: var(--step-2, 1.4rem);
+}
+
+.section > p {
+    color: var(--gray-700);
+    margin-bottom: var(--ui-space-4);
+}
+
+.swatch-grid {
+    display: grid;
+    gap: var(--ui-space-3);
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.swatch {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--gray-200);
+    background: var(--white);
+}
+
+.swatch-color {
+    min-height: 74px;
+    padding: var(--ui-space-2);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.swatch-label {
+    padding: var(--ui-space-2);
+    border-top: 1px solid var(--gray-200);
+    background: var(--gray-50);
+    font-size: 0.85rem;
+    color: var(--gray-700);
+}
+
+.text-dark {
+    color: var(--gray-900);
+}
+
+.text-light {
+    color: var(--white);
+}
+
+.bg-corporate-primary {
+    background: var(--corporate-primary-500);
+}
+.bg-corporate-secondary {
+    background: var(--corporate-secondary-500);
+}
+.bg-corporate-tertiary {
+    background: var(--corporate-tertiary-500);
+}
+.bg-corporate-quaternary {
+    background: var(--corporate-quaternary-500);
+}
+
+.bg-semantic-success {
+    background: var(--semantic-success-500);
+}
+.bg-semantic-info {
+    background: var(--semantic-info-500);
+}
+.bg-semantic-warning {
+    background: var(--semantic-warning-500);
+}
+.bg-semantic-danger {
+    background: var(--semantic-danger-500);
+}
+
+.bg-black {
+    background: var(--black);
+}
+.bg-white {
+    background: var(--white);
+}
+.bg-gray-50 {
+    background: var(--gray-50);
+}
+.bg-gray-100 {
+    background: var(--gray-100);
+}
+.bg-gray-200 {
+    background: var(--gray-200);
+}
+.bg-gray-300 {
+    background: var(--gray-300);
+}
+.bg-gray-400 {
+    background: var(--gray-400);
+}
+.bg-gray-500 {
+    background: var(--gray-500);
+}
+.bg-gray-600 {
+    background: var(--gray-600);
+}
+.bg-gray-700 {
+    background: var(--gray-700);
+}
+.bg-gray-800 {
+    background: var(--gray-800);
+}
+.bg-gray-900 {
+    background: var(--gray-900);
+}
+
+.text-corporate-primary {
+    color: var(--corporate-primary-500);
+}
+.text-corporate-secondary {
+    color: var(--corporate-secondary-500);
+}
+.text-corporate-tertiary {
+    color: var(--corporate-tertiary-500);
+}
+.text-corporate-quaternary {
+    color: var(--corporate-quaternary-500);
+}
+
+.text-semantic-success {
+    color: var(--semantic-success-500);
+}
+.text-semantic-info {
+    color: var(--semantic-info-500);
+}
+.text-semantic-warning {
+    color: var(--semantic-warning-500);
+}
+.text-semantic-danger {
+    color: var(--semantic-danger-500);
+}
+
+.ui-grid {
+    display: grid;
+    gap: var(--ui-space-3);
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.card {
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    padding: var(--ui-space-3);
+    background: var(--white);
+}
+
+.card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.35rem;
+}
+
+.card p {
+    color: var(--gray-700);
+    font-size: 0.92rem;
+}
+
+.card-corporate-primary {
+    border-left: 6px solid var(--corporate-primary-500);
+}
+.card-corporate-secondary {
+    border-left: 6px solid var(--corporate-secondary-500);
+}
+.card-corporate-tertiary {
+    border-left: 6px solid var(--corporate-tertiary-500);
+}
+.card-corporate-quaternary {
+    border-left: 6px solid var(--corporate-quaternary-500);
+}
+
+.card-semantic-success {
+    border-left: 6px solid var(--semantic-success-500);
+}
+.card-semantic-info {
+    border-left: 6px solid var(--semantic-info-500);
+}
+.card-semantic-warning {
+    border-left: 6px solid var(--semantic-warning-500);
+}
+.card-semantic-danger {
+    border-left: 6px solid var(--semantic-danger-500);
+}
+
+.button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ui-space-2);
+}
+
+.btn {
+    border: 0;
+    border-radius: 999px;
+    padding: 0.6rem 1rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+}
+
+.btn-corporate-primary {
+    background: var(--corporate-primary-500);
+    color: var(--white);
+}
+.btn-corporate-secondary {
+    background: var(--corporate-secondary-500);
+    color: var(--white);
+}
+.btn-corporate-tertiary {
+    background: var(--corporate-tertiary-500);
+    color: var(--white);
+}
+.btn-corporate-quaternary {
+    background: var(--corporate-quaternary-500);
+    color: var(--white);
+}
+
+.btn-semantic-success {
+    background: var(--semantic-success-500);
+    color: var(--white);
+}
+.btn-semantic-info {
+    background: var(--semantic-info-500);
+    color: var(--white);
+}
+.btn-semantic-warning {
+    background: var(--semantic-warning-500);
+    color: var(--gray-900);
+}
+.btn-semantic-danger {
+    background: var(--semantic-danger-500);
+    color: var(--white);
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.3rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-right: var(--ui-space-1);
+    margin-bottom: var(--ui-space-1);
+}
+
+.badge-corporate-primary {
+    background: var(--corporate-primary-100);
+    color: var(--corporate-primary-700);
+}
+.badge-corporate-secondary {
+    background: var(--corporate-secondary-100);
+    color: var(--corporate-secondary-700);
+}
+.badge-corporate-tertiary {
+    background: var(--corporate-tertiary-100);
+    color: var(--corporate-tertiary-700);
+}
+.badge-corporate-quaternary {
+    background: var(--corporate-quaternary-100);
+    color: var(--corporate-quaternary-700);
+}
+
+.badge-semantic-success {
+    background: var(--semantic-success-100);
+    color: var(--semantic-success-700);
+}
+.badge-semantic-info {
+    background: var(--semantic-info-100);
+    color: var(--semantic-info-700);
+}
+.badge-semantic-warning {
+    background: var(--semantic-warning-100);
+    color: var(--semantic-warning-700);
+}
+.badge-semantic-danger {
+    background: var(--semantic-danger-100);
+    color: var(--semantic-danger-700);
+}
+
+@media (max-width: 680px) {
+    body {
+        padding: var(--ui-space-3);
+    }
+}
